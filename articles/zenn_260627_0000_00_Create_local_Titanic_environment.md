@@ -1,5 +1,5 @@
 ---
-title: "15-⑥[AI][Kaggle]Kaggle実践1 (箸休め)ローカルでKaggle Titanicの実行環境をつくる"
+title: "15-①[AI][Kaggle]Kaggle実践1 ローカルPCにKaggle Titanicの実行環境をつくる"
 emoji: "🙆‍♀️"
 type: "tech"
 topics:
@@ -11,14 +11,9 @@ published: true
 published_at: "2026-06-27 08:55"
 ---
 
-[Kaggle実践1(『Titanic生存者予測』1.まず一通りやってみる)](https://zenn.dev/rg687076/articles/76b1608f4ffe36)
-[Kaggle実践1(『Titanic生存者予測』2.ブラッシュアップのロードマップ)](https://zenn.dev/rg687076/articles/f0c1aa0b59ea76)
-[Kaggle実践1(『Titanic生存者予測』3.Name(敬称)の特徴量エンジニアリング)](https://zenn.dev/rg687076/articles/858ea82fddadc1)
-[Kaggle実践1(『Titanic生存者予測』4.家族人数の特徴量エンジニアリング)](https://zenn.dev/rg687076/articles/52d7e8f375e9ba)
-[Kaggle実践1(『Titanic生存者予測』5.年齢の特徴量エンジニアリング)](https://zenn.dev/rg687076/articles/04f64c76d7ffb6)
-[Kaggle実践1(『Titanic生存者予測』6.(箸休め)ローカルでKaggle Titanicの実行環境をつくる)](https://zenn.dev/rg687076/articles/00bcccd2aca95a)
-[Kaggle実践1(『Titanic生存者予測』7.ローカルでKaggle Titanicの実行環境をつくる)](https://zenn.dev/rg687076/articles/519f398b373e26)
-[Kaggle実践1(『Titanic生存者予測』8.Cabinの特徴量エンジニアリング](https://zenn.dev/rg687076/articles/zenn_260627_1940_01_cabin_feature)
+[Kaggle実践1(『Titanic生存者予測』1.ローカルにKaggle Titanicの実行環境をつくる](https://zenn.dev/rg687076/articles/zenn_260627_0000_00_Create_local_Titanic_environment)
+[Kaggle実践1(『Titanic生存者予測』2.最初の提出](https://zenn.dev/rg687076/articles/zenn_260627_0000_01_first_submission)
+[Kaggle実践1(『Titanic生存者予測』3.Cabinの特徴量エンジニアリング](https://zenn.dev/rg687076/articles/zenn_260627_1940_01_cabin_feature)
 
 https://www.kaggle.com/c/titanic
 
