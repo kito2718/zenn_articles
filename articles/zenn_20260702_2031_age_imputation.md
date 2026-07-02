@@ -87,3 +87,9 @@ df_all.loc[df_all['Age'].isnull(), 'Age'] = predicted_ages
 年齢を単純な中央値ではなく、他の情報から推測して埋めることで、よりリアルな乗客像をモデルに学習させることができたと思う。
 
 お役に立てれば。
+
+English version:
+[Kaggle Practice 1: Setting Up a Local Environment for the Kaggle Titanic Competition](https://dev.to/kito2718/setting-up-kaggle-titanic-environment-on-a-local-pc-336k)
+[Kaggle Practice 2: First Submission](https://dev.to/kito2718/kaggle-titanic-my-first-submission-eda-feature-engineering-and-model-evaluation-896)
+[Kaggle Practice 3: Feature Engineering for Cabin](https://dev.to/kito2718/kaggle-titanic-cabin-feature-engineering-is-it-really-effective-44nc)
+[Kaggle Practice 4: Feature Engineering (Imputing Age with Random Forest)](https://dev.to/kito2718/kaggle-titanic-improving-survival-prediction-with-random-forest-age-imputation-5b3l)
