@@ -11,7 +11,8 @@ published: true
 published_at: "2026-07-05 11:00"
 ---
 
-![](images/zenn_20260705_1044_make_a_videophotobookv3_top.png =500x)
+![](images/zenn_20260705_1044_make_a_videophotobookv3_top.png)
+<img src="images/zenn_20260705_1044_make_a_videophotobookv3_top.png" width=500>
 
 # Abstract
 * ARCoreを使った画像認識ARアプリの開発の話
