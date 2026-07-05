@@ -19,10 +19,10 @@ published_at: "2026-07-05 11:00"
 # 概要
 以前公開したARアプリ [VideoPhotoBook](https://play.google.com/store/apps/details?id=com.tks.videophotobook&hl=ja) は、Vuforiaライブラリを使って実装してたんだけど、それで特に問題もなかったんだけど、Google公式のARCoreでも画像認識ができるのが分かったので公開してみた。
 
-アプリ: [VideoPhotoBookv3](まだ未定)
+アプリ: [VideoPhotoBookv3 申請中](まだ未定)
 github: [VideoPhotoBookv3](https://github.com/kito2718/VideoPhotoBookv3)
 zennポスト: [ARCoreを使った画像認識ARアプリを公開してみた](https://zenn.dev/rg687076/articles/zenn_20260705_1044_make_a_videophotobookv3)
-DEV.toポスト: [考え中](まだ未定)
+DEV.toポスト: [How I Built an Offline AR Video-Book App on Android (Without Cloud APIs or Premium SDKs)](https://dev.to/kito2718/how-i-built-an-offline-ar-video-book-app-on-android-without-cloud-apis-or-premium-sdks-18c0)
 
 ## 1. 要件
 *   **機能**: ギャラリーから選んだ画像（マーカー）と動画をセットで登録し、カメラでその画像を写すと、その画像の上に動画がピッタリ重なって再生される。
