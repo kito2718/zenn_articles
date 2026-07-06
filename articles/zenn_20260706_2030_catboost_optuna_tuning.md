@@ -3,7 +3,7 @@ title: "15-⑥[AI][Kaggle]Kaggle実践1: 避難行動を捉えるグループ統
 emoji: "🚢"
 type: "tech"
 topics: ["kaggle", "titanic", "catboost", "optuna", "machinelearning"]
-published: false
+published: true
 ---
 
 [Kaggle実践1『Titanic生存者予測』1.ローカルPCにKaggle Titanicの実行環境をつくる](https://zenn.dev/rg687076/articles/zenn_260627_0000_00_create_local_titanic_env)
