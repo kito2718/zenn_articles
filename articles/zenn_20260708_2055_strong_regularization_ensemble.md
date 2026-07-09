@@ -1,5 +1,5 @@
 ---
-title: "15-⑧[AI][Kaggle]Kaggle実践1(最終回): Kaggle Titanicで過学習と戦う！グループ生存情報と最強正則化アンサンブル"
+title: "15-⑧[AI][Kaggle]Kaggle実践1(最終回): 過学習と戦ってみた！"
 emoji: "ship"
 type: "tech"
 topics: ["kaggle", "machinelearning", "ensemble", "python", "optuna"]
@@ -171,12 +171,8 @@ def objective_cat(trial):
 
 以前の自己最高CV(0.86869) に比べると、木モデル単体の過学習が抑えられたことで CV全体は少し低下した。モデルの頑健性は格段に上がっとるはず。
 
-★★★
-
 ### 2. 提出 (Kaggle Public Score)
 * **Public Score**: **0.79425**(届かず!)
 うーん、なかなか、ムズい。
-
-★★★
 
 お役に立てれば。
