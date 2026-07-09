@@ -29,14 +29,14 @@ https://www.kaggle.com/c/titanic
 前回の検証でスコアの良かった CatBoost モデルを使って、実際にどの乗客を誤分類しているかエラー分析を行った。
 結果、誤分類130サンプルのうち、**56.9%** が3等客室(Pclass 3) の乗客(特に男性)というのがわかった。
 
-![エラー分析 (Pclass別の誤分類分布)](https://github.com/kito2718/KaggleTitanic/raw/main/zenn_articles/articles/images/zenn_20260707_2118_error_analysis_pclass.png)*エラー分析(Pclass別の誤分類分布)*
+![エラー分析 (Pclass別の誤分類分布)](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_20260707_2118_error_analysis_pclass.png)*エラー分析(Pclass別の誤分類分布)*
 
 # チケット近接性による客室配置の擬似復元
 タイタニック号の客室番号 (Cabin) はデータの約77%が欠損してるけれども、船室の物理的な配置は生死に直結する重要な要素みたい。つまりは、船内のどのエリアの部屋に居たかは、最上階の避難ボートまでの距離や、浸水が始まった場所からの脱出経路に直結しとると考えられ。
 なので、チケット番号 (Ticket) の数値部分の規則性に着目。チケット番号が近い乗客 (下数桁の差が 5 以内) は、同時期に同じ場所でチケットを購入し、船内で隣接する客室に配置されとった可能性が高いと考察。
 つまり、「チケット番号が近い (＝同じエリアに寝まりしとった) 近傍の人たちの生存率」 をモデルに教えることで、「そのエリアは避難しやすかった恵まれた場所か、それとも逃げ遅れやすい脱出困難な場所やったか」という物理的な避難環境を表現できる特徴量になるかと！
 
-![Ticket近接生存率 (OOF) の生存・死亡別分布](https://github.com/kito2718/KaggleTitanic/raw/main/zenn_articles/articles/images/zenn_20260707_2118_ticket_neighbor_survival_dist.png)*Ticket近接生存率 (OOF) の生存・死亡別分布*
+![Ticket近接生存率 (OOF) の生存・死亡別分布](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_20260707_2118_ticket_neighbor_survival_dist.png)*Ticket近接生存率 (OOF) の生存・死亡別分布*
 
 このドメイン知識に基づいて、以下の特徴量エンジニアリングを実施。
 
