@@ -5,58 +5,157 @@ type: "tech"
 topics: ["kaggle", "diffusers", "yolo", "pytorch", "uv"]
 published: true
 published_at: "2026-07-09 22:44"
+series: "Kaggle実践2"
+tags: ["Kaggle", "Stable Diffusion", "YOLO", "画像生成"]
 ---
 
-[Kaggle実践2『Tex2Img Gen』1.ローカルPCに検証環境をつくってみた](https://zenn.dev/rg687076/articles/zenn_20260709_2244_baseline_sd_yolo)
+# シリーズ記事 of リンク集
+* **Kaggle実践2「Text-to-Image Generation Challenge」コンペ用にローカル検証環境を構築してみた** (本記事)
 
-# Abstract
+# アイキャッチ画像とキャプション
+![アイキャッチ画像](images/zenn_eyecatch_sd_yolo.png)
+*テキスト → 画像生成*
+
+# Abstruct
 * 過去コンペ「Text-to-Image Generation Challenge」に参加
-* ローカル検証環境を構築してみた。
+* ローカル検証環境を構築
+* 一通り実行
 
-# 背景
-Kaggle Titanicを卒業して、次何やるかって考えたときに、「やっぱ次は画像系やろ！」って心の声に従って、このコンペを選択しました。
+# 概要
+Kaggle Titanicを卒業して、次何やるかって考えた時に、「やっぱ次は画像系やろ!」って心の声に従って、このコンペ「Text-to-Image Generation Challenge」に挑戦することにしました。
+このコンペの目標は、与えられたプロンプト(文字列) → いかに意図通りの画像を生成できるか(Prompt-to-Image Alignment)を競うものになってます。まさに最先端！ 生成AIのスキルを積むには格好のネタだろうと。
+この記事では、ローカルPC上に画像生成と自動評価を行える検証環境を構築した手順と、その処理の中身の概要をまとめてみました。
 
-# インストールライブラリ
-- python3.12 ... 3.14が最新だけどそれを使うと、pytorchでGPUが使えず。なので3.12。
-- uv ... pythonのパッケージマネージャ
-- yolo ... 
-- sd ... 
+# 環境構築の手順
 
-# マシン構成
-- OS: Windows11
-- メモリ: 32GB
-- CPU: 論理コア数24
-- GPU: Geforce RTX 4060
-- ストレージ: HDD 空き500GB
+## 1. マシン構成
+検証環境として使用したローカルPCのスペックは以下の通りです。
+* **OS**: Windows 11
+* **CPU**: インテル Core プロセッサー（論理コア数24）
+* **メモリ**: 32GB
+* **GPU**: NVIDIA GeForce RTX 4060
+* **ストレージ**: HDD（空き容量500GB）
 
-# 1. インストール手順
+## 2. インストールライブラリと選定理由
+* **Python 3.12** ... 現在の最新は 3.14 ですが、3.14だと、PyTorch等のライブラリがGPUを使えんかった😞
+* **uv** ... Python パッケージマネージャーです。
+* **diffusers** ... Hugging Faceが提供する、Stable Diffusionなどの拡散モデルを動かすためのデファクトスタンダードライブラリ。
+* **ultralytics(YOLO)** ... 生成された画像の中に、プロンプトで指示されたオブジェクトが正しく描かれているかを自動で検出・評価するために使用。
+
+## 3. インストール手順
+
+PowerShell で、下記コマンドを実行。
+
 ```powershell
 # 1. uv のインストール
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 
-# 2. Python 3.12 を指定した仮想環境の作成 (uvが自動で対象Pythonバージョンをダウンロードしてくれます)
+# 2. Python 3.12 を指定した仮想環境の作成
 uv venv --python 3.12
 
-# 3. CUDA 12.4 対応の PyTorch および Torchvision を仮想環境にインストール
+# 3. CUDA 12.4 対応 of PyTorch および Torchvision を仮想環境にインストール
 uv pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
 
-# 4. 残りの依存ライブラリ (diffusers, transformers, accelerate, pandas, ultralytics) をインストール
+# 4. 必要な依存ライブラリをまとめてインストール
 uv pip install diffusers "transformers<5.0.0" accelerate pandas ultralytics
 ```
-これで GPU設定(**NVIDIA GeForce RTX 4060**)も完了し、CUDAを利用した高速な画像生成環境が整いました。
 
-# 2. 一回通して実行してみる
-構築した環境でがちゃんと動作するのか、実装→実行→出力を一通り実行する。
+GPU（NVIDIA GeForce RTX 4060）で、CUDAを利用した高速な画像生成環境ができるようになりました。
 
-## 2.1. 実行の流れの解説
+# 一回通して実行してみた
 
-構築したベースラインコードの要点は以下の通りです。
+一気通貫で動作するかを確認。
+- プロンプトの読み込み → 画像生成 → 物体検出モデル(YOLO)による自動評価
 
-*   **入力データ**: Kaggle API経由で取得した `DreamLayer-Prompt-Kaggle.txt`（49個のテスト用プロンプトが含まれるテキストファイル）
-*   **画像生成**: 高速化のために **`stabilityai/sd-turbo`** (1ステップ生成モデル) を採用。
-*   **ローカル評価**: 生成画像に対して `yolov8n.pt` (YOLOv8 nano) で物体検出を行い、プロンプト内の名詞キーワードとマッチングしてF1スコアを算出。
+```cmd
+uv run src/baseline.py
+```
 
-### 主なソースコード (`src/baseline.py` の抜粋)
+# 処理フローまとめ
+
+### 1. 文字列から画像が生成される流れの解説
+
+中心となるプロセス「文字列(プロンプト)から画像を生成する」は、内部的にどのような仕組みで動いていかというと、**Stable Diffusion** だと下記流れのようです。
+
+#### 1.1 生成プロセスの全体像
+
+Stable Diffusionは、**「潜在拡散モデル(Latent Diffusion Model: LDM)」** と呼ばれるアーキテクチャで動いています。高解像度のピクセル空間で直接計算を行うのではなく、より次元の低い「潜在空間(Latent Space)[^2]」に圧縮してノイズ除去[^3]を行うことで、メモリ消費量を抑えながら生成するという方法ですね。
+
+[^2]: Q.そもそも潜在空間って何？ A.デジタル画像(ピクセル空間)は、例えば 512x512 の「ドット(点)の集まり」で、情報量が多すぎるので、ギュッと圧縮して、「ドットの並び」から「画像に何が描かれているかという特徴(輪郭、色合い、物体の意味など)」だけを抽出したデジタルデータに変換したデータを扱う空間のこと。<br/>
+
+[^3]: Q.そもそも「ノイズ除去」って何？ U-Netが司る作業のこと。U-Netは「次に引くべき『無駄な砂嵐の成分』を予測して、引き算する」という作業をやってる。考え方は**「彫刻」**と同じ。<br/>
+
+```mermaid
+graph TD
+    subgraph Input ["1.入力"]
+        Prompt["テキストプロンプト<br>(文字列)"]
+        Noise["ランダムノイズ<br>(潜在空間: 64x64)"]
+    end
+
+    subgraph TextProcessing ["2.テキスト解析"]
+        CLIP["CLIP Text Encoder"]
+    end
+
+    subgraph LatentProcess ["3.潜在空間での逆拡散プロセス(Denoising Loop)"]
+        UNet["3.1.U-Net(ノイズ予測)"]
+        Scheduler["3.2.スケジューラ<br>(ノイズ低減制御)"]
+    end
+
+    subgraph Decode ["④ ピクセル空間への復元"]
+        VAEDecoder["VAE Decoder"]
+    end
+
+    subgraph Output ["⑤ 出力"]
+        Image["生成画像<br>(ピクセル空間: 512x512)"]
+    end
+
+    %% データフロー
+    Prompt --> CLIP
+    CLIP -->|テキスト埋め込みベクトル| UNet
+    Noise --> UNet
+    UNet -->|予測されたノイズ| Scheduler
+    Scheduler -->|ノイズを除去した潜在表現| UNet
+    UNet -.->|ループを規定ステップ繰り返す| UNet
+    UNet -->|最終的な潜在表現| VAEDecoder
+    VAEDecoder --> Image
+
+    %% スタイリング
+    style Prompt fill:#e1f5fe,stroke:#0288d1,stroke-width:2px
+    style Noise fill:#efebe9,stroke:#5d4037,stroke-width:2px
+    style CLIP fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style UNet fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    style VAEDecoder fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style Image fill:#ffe0b2,stroke:#f57c00,stroke-width:2px
+```
+
+#### 各コンポーネントの役割
+
+**1. 入力**
+   * **テキストプロンプト（文字列）** ... 入力文字列。表示させたいものを羅列する。例: "A dog sitting on a chair(イスに座っている犬)" など。
+   * **ランダムノイズ(潜在空間: 64x64)** ... プログラムの実行時に、その場で自動生成している数値列。64x64の配列。
+
+**2. テキスト解析**
+   * **CLIP Text Encoder** ... 入力されたプロンプト（例: `"A group of people standing on a snow covered hill."`）を単語に分解(トークン化[^1])し、AIが理解できる高次元の数値ベクトル(Text Embeddings)に変換します。これが画像生成の「道標」となります。
+
+  [^1]: Q.そもそもトークン化って何？:A.文章を「最小単位(トークン)」に切り分けて、辞書を使って「数値(ID番号)」に変換する処理のこと。 例:「A dog on a chair」の文を「"a", "dog", "on", "a", "chair"」に切り分けて、辞書を使って、[320, 2361, 803, 320, 8942]みたいにすること。<br/>
+
+1. **U-Net(潜在空間でのノイズ予測)**
+   * 画像生成の開始時は、何の意味も持たないランダムなノイズ（Latent Noise）からスタートします。
+   * U-Netは、ノイズ画像とCLIPから送られてきたテキストベクトルを入力として受け取り、「プロンプトの意味に近づけるためには、現在の画像からどのノイズを取り除くべきか」を予測します。このテキストとノイズの紐付けには、**Cross-Attention（相互アテンション）** という仕組みが使われています。
+2. **スケジューラ（ノイズ低減の制御）**
+   * U-Netが予測したノイズを、どの程度の割合で引き算するかを制御するアルゴリズムです。
+   * 「ノイズ予測 → ノイズ引き算」を何度もループ（Denoising Loop）することで、砂嵐のような状態から徐々に輪郭が浮かび上がり、最終的な画像の潜在表現が完成します。
+   * *※今回のベースラインで採用している `sd-turbo` は、このノイズ除去ステップを「わずか1ステップ」で終わらせることができる特殊な蒸留モデル（Adversarial Diffusion Distortion）であり、極めて高速に動作します。*
+3. **VAE Decoder（ピクセル空間への復元）**
+   * 潜在空間（通常は 64x64 などの小さなサイズ）で完成したノイズのないデータを、Variational Autoencoder (VAE) のデコーダーを通して、私たちが視覚的に認識できる解像度（512x512 などのピクセル画像）に復元・デコードします。
+
+---
+
+### 2.2. 実行の流れとベースラインコード
+
+構築したベースラインコードでは、Kaggle APIから取得した `DreamLayer-Prompt-Kaggle.txt`（49個の評価用プロンプト）を読み込み、上記のプロセスで画像を生成した後、YOLOv8を用いて「プロンプト内のキーワードが正しく描画されているか」を評価します。
+
+#### 主なソースコード (`src/baseline.py` の抜粋)
 
 ```python
 import torch
@@ -94,9 +193,9 @@ def calculate_f1_score(expected, detected):
 
 ---
 
-## 2.2. 実行結果とローカル評価スコア
+### 2.3. 実行結果とローカル評価スコア
 
-ベースラインスクリプトを GPU 上で実行した結果、以下の出力を得ました。
+ベースラインスクリプトを GPU（CUDA）上で実行した結果、以下の出力を得ました。
 
 ```text
 Using device: cuda
@@ -117,25 +216,34 @@ Mean F1 Score: 0.5102
 ==================================================
 ```
 
-SD-Turbo（1ステップモデル）を使ったローカルのベースライン F1 スコアは **`0.5102`** となりました。
+高速な1ステップ生成モデルである `SD-Turbo` を用いた場合のローカル F1 スコアは **`0.5102`** となりました。
 
-### 出力されたファイル群 (output/)
-- `output/images/0001.png` 〜 `0049.png` (生成された画像)
-- `output/results.csv` (プロンプト、検出オブジェクト、F1スコアの詳細ログ)
-- `output/submission.csv` (Kaggle提出用CSV)
-- `output/config-dreamlayer.json` (生成時のパラメータ設定)
+#### 出力されたファイル群 (output/)
+* `output/images/0001.png` 〜 `0049.png` (生成された画像)
+* `output/results.csv` (プロンプト、検出オブジェクト、F1スコアの詳細ログ)
+* `output/submission.csv` (Kaggle提出用CSV)
+* `output/config-dreamlayer.json` (生成時のパラメータ設定)
 
 ---
 
-# 5. 今後の方針
+## 3. 今後の方針
 
 ベースラインでスコア `0.5102` を得られたため、ここからスコアをさらに向上させるための具体的な施策がクリアになりました。
 
-1.  **高精度な生成モデルへの切り替え**:
-    SD-Turbo は速度重視ですが、描写力（特に細かい物体の配置や形状）が甘いため、**SDXL (`stabilityai/stable-diffusion-xl-base-1.0`)** や **Flux** などのより表現力の高いモデルに変更する。
-2.  **プロンプト調整 (Prompt Engineering)**:
-    YOLOv8 が検出しやすいサイズや配置でターゲットオブジェクトが描かれるよう、プロンプトに品質ワードや強調表現をブレンドする。
-3.  **セルフフィードバックイテレーション (最大化ハック)**:
-    ローカル環境でシード値を変えて複数枚の画像を生成し、**「ローカルの YOLOv8 で最もF1スコアが高くなった画像」を自動選別して提出用画像とするシステム**を組む。これにより、評価器（YOLOv8）の特性に過学習（最適化）させた高スコアな提出用セットを作成可能です。
+1. **高精度な生成モデルへの切り替え**:
+   SD-Turbo は速度重視ですが、描写力（特に細かい物体の配置や形状）が甘いため、**SDXL (`stabilityai/stable-diffusion-xl-base-1.0`)** や **Flux** などのより表現力の高いモデルに変更する。
+2. **プロンプト調整 (Prompt Engineering)**:
+   YOLOv8 が検出しやすいサイズや配置でターゲットオブジェクトが描かれるよう、プロンプトに品質ワードや強調表現をブレンドする。
+3. **セルフフィードバックイテレーション (最大化ハック)**:
+   ローカル環境でシード値を変えて複数枚の画像を生成し、**「ローカルの YOLOv8 で最もF1スコアが高くなった画像」を自動選別して提出用画像とするシステム**を組む。これにより、評価器（YOLOv8）の特性に過学習（最適化）させた高スコアな提出用セットを作成可能です。
 
 次回は、この「セルフフィードバック自動選別システム」の実装と、高画質モデルへの切り替えによるスコア変化を検証していきます！
+
+---
+
+# まとめ
+今回は、Kaggle「Text-to-Image Generation Challenge」に向けて、ローカルPCにStable DiffusionとYOLOv8を組み合わせた検証環境を構築し、ベースラインとしてF1スコア `0.5102` を得ることができました。
+また、文字列から画像が生成される具体的なメカニズムについても理解を深めることができました。
+ここからさらにモデルの選定やプロンプトハックを行い、スコアを伸ばしていきたいと思います。
+
+この記事が画像生成コンペへの挑戦や、ローカルでの画像生成環境構築を検討している皆さまのお役に立てれば幸いです。
