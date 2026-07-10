@@ -9,7 +9,6 @@ series: "Kaggle実践2"
 tags: ["Kaggle", "Stable Diffusion", "YOLO", "画像生成"]
 ---
 
-# シリーズ記事 of リンク集
 * **Kaggle実践2「Text-to-Image Generation Challenge」コンペ用にローカル検証環境を構築してみた** (本記事)
 
 # アイキャッチ画像とキャプション
