@@ -11,7 +11,8 @@ tags: ["Kaggle", "Stable Diffusion", "YOLO", "画像生成"]
 
 **Kaggle実践2-①「Text-to-Image Generation Challenge」コンペ用にローカル検証環境を構築してみた** (本記事)
 
-![アイキャッチ画像](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_20260709_2244_eyecatch_sd_yolo.png =500x)*「Text-to-Image Generation Challenge」コンペティション*
+[![アイキャッチ画像](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_20260709_2244_eyecatch_sd_yolo.png =500x)](https://www.kaggle.com/competitions/text-to-image-challenge)
+*「Text-to-Image Generation Challenge」コンペティション*
 
 # Abstruct
 * 過去コンペ「Text-to-Image Generation Challenge」に参加
