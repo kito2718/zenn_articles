@@ -4,12 +4,25 @@ emoji: "ship"
 type: "tech"
 topics: ["kaggle", "machinelearning", "ensemble", "python", "optuna"]
 published: true
+published_at: "2026-07-08 20:55"
 ---
+
+[Kaggle実践1『Titanic生存者予測』1.ローカルPCにKaggle Titanicの実行環境をつくる](https://zenn.dev/rg687076/articles/zenn_260627_0000_00_create_local_titanic_env)
+[Kaggle実践1『Titanic生存者予測』2.初回提出](https://zenn.dev/rg687076/articles/zenn_260627_0000_01_first_submission)
+[Kaggle実践1『Titanic生存者予測』3.Cabinの特徴量エンジニアリング](https://zenn.dev/rg687076/articles/zenn_260627_1940_01_cabin_feature)
+[Kaggle実践1『Titanic生存者予測』4.特徴量エンジニアリング(ランダムフォレストに...](https://zenn.dev/rg687076/articles/zenn_20260702_2031_age_imputation)
+[Kaggle実践1『Titanic生存者予測』5.特徴量エンジニアリング(数値特徴量の非線形変換とビン...](https://zenn.dev/rg687076/articles/zenn_20260703_2025_fare_log_and_age_binning)
+[Kaggle実践1『Titanic生存者予測』6.避難行動を捉えるグループ統計量の追加とCa...](https://zenn.dev/rg687076/articles/zenn_20260706_2030_catboost_optuna_tuning)
+[Kaggle実践1『Titanic生存者予測』7.チケット番号の近接性による客室配置の擬似...](https://zenn.dev/rg687076/articles/zenn_20260707_2118_ticket_neighbor_survival)
+[Kaggle実践1『Titanic生存者予測』8.Kaggle実践1(最終回): 過学習と戦ってみた！](https://zenn.dev/rg687076/articles/zenn_20260708_2055_strong_regularization_ensemble)
+
+
+← [Kaggle入門14(ゲームAIと強化学習入門)](https://zenn.dev/rg687076/articles/49e1d162bfdeec)
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[Kaggle実践2(Text-to-Image)](https://zenn.dev/rg687076/articles/zenn_20260709_2244_baseline_sd_yolo) →
 
 もうここら辺が限界かな～。いろいろやってもスコアアップしないや。
 
 # Abstract
-
 * CVスコアは高い(0.868超え)のに本番(Public Score)が下がる過学習の問題へ対応を頑張ってみた。
 * グループ生存特徴量ば完全排除したアプローチで、Public Score が 0.77033 へ急落。グループ情報の重要性(遭難時に運命ば共にする物理的事実)が逆説的に実証された。
 * なので、グループ特徴量をフル活用しつつ、決定木の深さを3〜4に厳しく制限、かつ、L2正則化を通常値の10倍以上に高めた「超・強正則化モデル」を構築。

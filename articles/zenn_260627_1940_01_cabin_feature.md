@@ -17,11 +17,13 @@ published_at: "2026-06-28 17:45"
 [Kaggle実践1『Titanic生存者予測』4.特徴量エンジニアリング(ランダムフォレストに...](https://zenn.dev/rg687076/articles/zenn_20260702_2031_age_imputation)
 [Kaggle実践1『Titanic生存者予測』5.特徴量エンジニアリング(数値特徴量の非線形変換とビン...](https://zenn.dev/rg687076/articles/zenn_20260703_2025_fare_log_and_age_binning)
 [Kaggle実践1『Titanic生存者予測』6.避難行動を捉えるグループ統計量の追加とCa...](https://zenn.dev/rg687076/articles/zenn_20260706_2030_catboost_optuna_tuning)
+[Kaggle実践1『Titanic生存者予測』7.チケット番号の近接性による客室配置の擬似...](https://zenn.dev/rg687076/articles/zenn_20260707_2118_ticket_neighbor_survival)
+[Kaggle実践1『Titanic生存者予測』8.Kaggle実践1(最終回): 過学習と戦ってみた！](https://zenn.dev/rg687076/articles/zenn_20260708_2055_strong_regularization_ensemble)
 
 https://www.kaggle.com/c/titanic
 
 ← [Kaggle入門14(ゲームAIと強化学習入門)](https://zenn.dev/rg687076/articles/49e1d162bfdeec)
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[Kaggle実践2(Text-to-Image)](https://zenn.dev/rg687076/articles/zenn_20260709_2244_baseline_sd_yolo) →
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[Kaggle実践2(Text-to-Image)](https://zenn.dev/rg687076/articles/zenn_20260709_2244_baseline_sd_yolo) →
 
 [github公開中](https://github.com/kito2718/KaggleTitanic)
 
