@@ -13,7 +13,7 @@ tags: ["Kaggle", "Stable Diffusion", "YOLO", "画像生成"]
 * **Kaggle実践2「Text-to-Image Generation Challenge」コンペ用にローカル検証環境を構築してみた** (本記事)
 
 # アイキャッチ画像とキャプション
-![アイキャッチ画像](images/zenn_eyecatch_sd_yolo.png)
+![アイキャッチ画像](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_eyecatch_sd_yolo.png)
 *テキスト → 画像生成*
 
 # Abstruct
@@ -246,8 +246,6 @@ Mean F1 Score: 0.5102
    ローカル環境でシード値を変えて複数枚の画像を生成し、**「ローカルの YOLOv8 で最もF1スコアが高くなった画像」を自動選別して提出用画像とするシステム**を組む。これにより、評価器（YOLOv8）の特性に過学習（最適化）させた高スコアな提出用セットを作成可能。
 
 次は、この「セルフフィードバック自動選別システム」の実装と、高画質モデルへの切り替えによるスコア変化を検証します。
-
----
 
 # まとめ
 今回は、Kaggle「Text-to-Image Generation Challenge」に向けて、ローカルPCに検証環境を構築し一通り実行。F1スコア `0.5102` 。
