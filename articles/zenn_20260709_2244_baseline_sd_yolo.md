@@ -12,7 +12,7 @@ tags: ["Kaggle", "Stable Diffusion", "YOLO", "画像生成"]
 **Kaggle実践2-①「Text-to-Image Generation Challenge」コンペ用にローカル検証環境を構築してみた** (本記事)
 
 # アイキャッチ画像とキャプション
-![アイキャッチ画像](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_20260709_2244_eyecatch_sd_yolo.png)*テキスト → 画像生成*
+![アイキャッチ画像](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_20260709_2244_eyecatch_sd_yolo.png)*「Text-to-Image Generation Challenge」コンペティション *
 
 # Abstruct
 * 過去コンペ「Text-to-Image Generation Challenge」に参加
@@ -218,6 +218,10 @@ LOCAL EVALUATION COMPLETE
 Mean F1 Score: 0.5102
 ==================================================
 ```
+
+|1|2|
+|---|---|
+|![](https://github.com/kito2718/zenn_articles/raw/main/articles/images/t2i/001_0001.png)|![](https://github.com/kito2718/zenn_articles/raw/main/articles/images/t2i/001_0002.png)|
 
 高速な1ステップ生成モデルである `SD-Turbo` を用いた場合のローカル F1 スコアは **`0.5102`** となりました。
 
