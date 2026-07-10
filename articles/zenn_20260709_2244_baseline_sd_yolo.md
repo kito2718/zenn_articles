@@ -1,5 +1,5 @@
 ---
-title: "Kaggle Text-to-Image: uvでPython3.12 GPU環境を構築し、SD-TurboベースラインとYOLOv8ローカル評価を動かす"
+title: "16-①Kaggle実践②「Text-to-Image Generation Challenge」コンペ用にローカル検証環境を構築してみた"
 emoji: "🎨"
 type: "tech"
 topics: ["kaggle", "diffusers", "yolo", "pytorch", "uv"]
