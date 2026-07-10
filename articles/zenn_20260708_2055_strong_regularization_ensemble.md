@@ -18,7 +18,7 @@ published_at: "2026-07-08 20:55"
 
 
 ← [Kaggle入門14(ゲームAIと強化学習入門)](https://zenn.dev/rg687076/articles/49e1d162bfdeec)
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[Kaggle実践2(Text-to-Image)](https://zenn.dev/rg687076/articles/zenn_20260709_2244_baseline_sd_yolo) →
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[Kaggle実践2(Text-to-Image)](https://zenn.dev/rg687076/articles/zenn_20260709_2244_baseline_sd_yolo) →
 
 もうここら辺が限界かな～。いろいろやってもスコアアップしないや。
 
