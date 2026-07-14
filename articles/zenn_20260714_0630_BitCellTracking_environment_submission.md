@@ -8,24 +8,22 @@ series: "Biohub細胞トラッキング挑戦記"
 tags: ["kaggle", "python", "bioinformatics", "cell-tracking"]
 ---
 
-![アイキャッチ画像](/images/zenn_20260714_0630_eyecatch.png)
-*アイキャッチ画像: 3D空間における細胞トラッキングの可視化イメージ*
+[![アイキャッチ画像](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_20260714_0630_BitCellTracking_eyecatch.png =500x)](https://www.kaggle.com/competitions/biohub-cell-tracking-during-development)
+*Biohub - Cell Tracking During Development*
 
-### Abstruct
-Kaggleの生物画像コンペティション「Biohub - Cell Tracking During Development」における、環境構築から3D細胞検出・トラッキングベースラインの構築、そしてKaggle APIによる初回提出(Submit)までの手順を分かりやすく解説します。
+## Abstruct
+- Kaggleの生物画像コンペティション「Biohub - Cell Tracking During Development」に参加
+- 環境構築～初回提出(Submit)までの手順まとめ
+- windows 11
 
----
+## 概要
+初の開催中コンペに挑みます。生命科学とか全くやったことがありませんが、社会の役に立つ気が猛烈にしています。たまーにNHKのドキュメンタリーでも、細胞の分裂や移動をの映像を見たことがあって、そこに役立つスキルのはず。このコンペティションは、本質的には3D顕微鏡画像の時間変化データから細胞の位置(ノード)を検出し、フレーム間でそれらを結びつけるタスクということです。モチベーションとしては、「AIがどう関係すんの？」てムズそうなのをやり切って、自分のスキルアップに繋げたい。
 
-### 概要
-生命科学分野において、発生過程(Development)における細胞の分裂や移動を正確に追跡(Tracking)することは、形態形成や遺伝子発現のダイナミクスを理解するために極めて重要です。本コンペティションでは、3D顕微鏡画像の時間変化データから細胞の位置(ノード)を検出し、フレーム間でそれらを結びつける(エッジ)タスクに挑みます。
+データサイズが非常に大きいです。でもKaggle Notebooksは無料GPU枠を提供してくれてて、そこに開発環境を構築しました。ローカルPC環境もおいおい必要に応じて構築する予定です。
 
-データサイズが非常に大きいため、今回は無料のGPU枠が提供されているKaggle Notebooksをベースの開発環境として選定しました。ローカル環境はコードのバージョン管理や簡易的なデータ確認に使用し、実際の重い処理はクラウドで行うハイブリッド構成を採用します。
+## 環境構築手順
 
----
-
-### 内容
-
-#### 開発環境のセットアップと事前準備
+### 開発環境のセットアップと事前準備
 
 本コンペティションに参加するには、いくつかの事前準備が必要です。
 
@@ -33,16 +31,13 @@ Kaggleの生物画像コンペティション「Biohub - Cell Tracking During De
    [Biohub - Cell Tracking During Development](https://www.kaggle.com/competitions/biohub-cell-tracking-during-development)のページにアクセスし、「Join Competition」ボタンを押して規約に同意します。これを行わないと、データのダウンロードや提出ができません。
 
 2. **Kaggle APIトークンの取得**
-   Kaggleアカウントの設定ページ(Settings)から「Create New Token」をクリックし、`kaggle.json`ファイルをダウンロードします。ローカル環境から提出する際や、CLIを使う際に必要となります。
+   Kaggleアカウントの設定ページ(Settings)から「Create New Token」をクリックし、`kaggle.json`ファイルをダウンロードします。ローカル環境から提出する際や、CLIを使う際に必要となります。置き場所はユーザー配下でいいかと。
 
-```bash
-# Kaggle APIトークンの配置(Linux/Macの場合)
-mkdir -p ~/.kaggle
-cp kaggle.json ~/.kaggle/
-chmod 600 ~/.kaggle/kaggle.json
+```tree
+C:\user\xxx\.kaggle\kaggle.json
 ```
 
-#### データの概要と読み込み
+### データの概要と読み込み
 
 本コンペティションのデータは、OME-Zarrと呼ばれる、巨大な多次元バイナリデータを効率的に扱うためのフォーマットで提供されています。形状は基本的に(T,C,Z,Y,X)の5次元構造(T:時間, C:チャンネル, Z:深さ, Y:高さ, X:幅)となっています。
 
@@ -56,10 +51,13 @@ store = zarr.open("path_to_data.zarr", mode='r')
 arr = store['0']
 print(f"Data shape: {arr.shape}")
 ```
+:::message alert
+上記コード実は、"import zarr"でエラーになります。kaggleには`zarr`がないらしいです。なので別途インストール作業が必要です。さらに提出時には、internet off って設定にする必要があって、Notebookに `!pip install zarr`ができません。そのあたりをこのリンクにまとめました。[Kaggleでプリセットされてないライブラリをimportできる様にする方法]() 見てね。
+:::
 
-#### ベースラインパイプラインの構築
+### 最初の提出モデルを作る
 
-ベースラインモデルは、以下のシンプルな4つのステップで構築します。
+最初に作るモデルは、以下のシンプルな4つのステップで構築します。
 
 ```mermaid
 flowchart TD
@@ -68,7 +66,7 @@ flowchart TD
     C --> D[4. submission.csvの生成と提出]
 ```
 
-##### 1. 3Dブロブ検出による細胞の位置特定
+#### 1. 細胞の位置特定
 
 細胞の検出には、`scikit-image`ライブラリに用意されている `blob_dog`(Difference of Gaussians)アルゴリズムを使用します。この関数は3Dボリュームデータにも直接適用できます。
 
@@ -83,7 +81,7 @@ def detect_cells_3d(image_3d, min_sigma=2, max_sigma=5, threshold=0.1):
     return np.empty((0, 3))
 ```
 
-##### 2. 最近傍マッチングによる時間追跡(トラッキング)
+#### 2. 最近傍マッチングによる時間追跡(トラッキング)
 
 時間軸(T)に沿って、前フレーム(T-1)で検出された細胞と現フレーム(T)で検出された細胞の距離を計算し、最も距離が近いペアを紐付けます(Greedyマッチング)。
 
@@ -109,7 +107,7 @@ def track_frame_to_frame(coords_prev, coords_curr, max_distance=15.0):
     return links
 ```
 
-##### 3. 提出データの整形
+#### 3. 提出データの整形
 
 コンペティションで指定されているCSVのスキーマに合わせて、検出した細胞(Node)と紐付け(Edge)の情報を格納します。
 
@@ -126,19 +124,13 @@ df_sub.insert(0, 'id', range(len(df_sub)))
 df_sub.to_csv("submission.csv", index=False)
 ```
 
-#### Kaggleへの初回提出
+### Kaggleへの初回提出
 
-CSVファイルが生成されたら、Kaggle API(CLI)を使ってコマンドラインから素早く提出することができます。
-
-```bash
-kaggle competitions submit -c biohub-cell-tracking-during-development -f submission.csv -m "Baseline blob_dog detector and nearest neighbor tracker"
-```
+CSVファイルが生成されたら、そのNotebook(*.ipynb)をアップロードして「Run All」。エラーがなければ、Save version。正常終了すれば、Submit to Competition。で完了です。
 
 提出が成功すると、リーダーボードでスコアが反映されます。最初のスコアを確認し、ベースラインパイプラインが正しく動いているか検証しましょう。
 
----
-
 ### まとめ
-OME-Zarr形式のデータ展開から、3D細胞検出、精度向上を模索する前に、まずは正常に提出が通ることを確認するためのベースラインパイプラインが完成しました。これをベースに、より高度な3D細胞検出モデル(CellposeやStarDistなど)の適用や、カルマンフィルター、ネットワークフローを用いたトラッキング手法の改善に進むことができます。
+これで、まずは正常に提出が通ることを確認できました。これをベースに、より高度な3D細胞検出モデル(CellposeやStarDistなど)の適用や、カルマンフィルター、ネットワークフローを用いたトラッキング手法の改善に進むことができます。
 
-本記事が皆様のコンペ挑戦の第一歩として、少しでもお役に立てれば幸いです。
+お役に立てれば。
