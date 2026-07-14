@@ -3,7 +3,7 @@ title: "【Kaggle】Biohub細胞トラッキング：環境構築からベース
 emoji: "🔬"
 type: "tech"
 topics: ["kaggle", "python", "bioinformatics", "celltracking"]
-published: false
+published: true
 series: "Biohub細胞トラッキング挑戦記"
 tags: ["kaggle", "python", "bioinformatics", "cell-tracking"]
 ---
