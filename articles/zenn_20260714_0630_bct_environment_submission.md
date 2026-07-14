@@ -1,5 +1,5 @@
 ---
-title: "【Kaggle】Biohub細胞トラッキング：環境構築からベースライン初回提出までの完全ガイド"
+title: "18-①Kaggle実践3 Biohub細胞トラッキング：環境構築からベースライン初回提出までの完全ガイド"
 emoji: "🔬"
 type: "tech"
 topics: ["kaggle", "python", "bioinformatics", "celltracking"]
@@ -10,6 +10,8 @@ tags: ["kaggle", "python", "bioinformatics", "cell-tracking"]
 
 [![アイキャッチ画像](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_20260714_0630_bitcelltracking_eyecatch_.png =500x)](https://www.kaggle.com/competitions/biohub-cell-tracking-during-development)
 *Biohub - Cell Tracking During Development*
+
+Kaggle実践3『Biohub細胞トラッキング』1.Kaggle Notebookに実行環境をつくる(この記事)
 
 ## Abstruct
 - Kaggleの生物画像コンペティション「Biohub - Cell Tracking During Development」に参加
