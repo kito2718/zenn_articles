@@ -52,7 +52,11 @@ arr = store['0']
 print(f"Data shape: {arr.shape}")
 ```
 :::message alert
-上記コード実は、"import zarr"でエラーになります。kaggleには`zarr`がないらしいです。なので別途インストール作業が必要です。さらに提出時には、internet off って設定にする必要があって、Notebookに `!pip install zarr`ができません。そのあたりをこのリンクにまとめました。[Kaggleでプリセットされてないライブラリをimportできる様にする方法]() 見てね。
+上記コード実は、"import zarr"でエラーになります。kaggleには`zarr`がないらしいです。なので別途インストール作業が必要です。さらに提出時には、internet off って設定にする必要があって、Notebookに `!pip install zarr`ができません。
+
+そのあたりを↓にまとめました。
+[(Kaggle提出のための)Offline環境でプリインストールされていないライブラリをインストールする方法](https://zenn.dev/rg687076/articles/zenn_20260714_0630_kaggle-offline-install)
+見てね。
 :::
 
 ### 最初の提出モデルを作る
