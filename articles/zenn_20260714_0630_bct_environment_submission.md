@@ -39,10 +39,10 @@ C:\user\xxx\.kaggle\kaggle.json
 ```
 
 3. Kaggle Notebookを作成
-[Codeタブ](https://www.kaggle.com/competitions/biohub-cell-tracking-during-development/code) → NewNotebookを押下して生成します。
+[Codeタブ](https://www.kaggle.com/competitions/biohub-cell-tracking-during-development/code) → NewNotebookを押下して生成します。  
 ![](https://github.com/user-attachments/assets/bfbb4995-a225-4078-b74b-1db9d19ddb59 =500x)
 
-4. Notebookの中身を下記に公開しています。Copy and Editから始めると簡単です。
+4. Notebookの中身を下記に公開しています。Copy and Editから始めると簡単です。  
 https://www.kaggle.com/code/aaaa1597/biocell-track-by-hgs
 
 ### データの概要と読み込み
