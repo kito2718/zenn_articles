@@ -42,6 +42,9 @@ C:\user\xxx\.kaggle\kaggle.json
 [Codeタブ](https://www.kaggle.com/competitions/biohub-cell-tracking-during-development/code) → NewNotebookを押下して生成します。
 ![](https://github.com/user-attachments/assets/bfbb4995-a225-4078-b74b-1db9d19ddb59 =500x)
 
+4. Notebookの中身は下記コードだと動作確認ができていて簡単です。
+https://github.com/kito2718/kaggle_Biohub-Cell_Tracking_During_Development/blob/main/notebooks/baseline_pipeline.ipynb
+
 ### データの概要と読み込み
 
 本コンペティションのデータは、OME-Zarrと呼ばれる、巨大な多次元バイナリデータを効率的に扱うためのフォーマットで提供されています。形状は基本的に(T,C,Z,Y,X)の5次元構造(T:時間, C:チャンネル, Z:深さ, Y:高さ, X:幅)となっています。
