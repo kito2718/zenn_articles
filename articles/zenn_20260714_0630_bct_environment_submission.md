@@ -62,6 +62,28 @@ Run Allを押下しましょう。
 経過は左下にPOPUPで表示されます。10分ぐらいかかるので一息入れて待ちましょう。
 ![](https://github.com/user-attachments/assets/7086ad23-32de-4b27-ac67-5a6c90a72c83 =500x)
 
+### Save Version
+Run Allが正常完了したら、Save Versionで保存しましょう。
+![](https://github.com/user-attachments/assets/87a8733a-e149-42db-80f9-4ba639aafe54 =500x)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ↓
+![](https://github.com/user-attachments/assets/6cf719a5-a745-4b33-a21c-0639119b7558 =500x)
+また、Run Allが実行されます。経過は左下にPOPUPで表示されますので、気長に待ちましょう。
+
+### Submit to competition
+やっと提出できるようになりました。Submit to competitionを開いてSubmitを押下します。
+![](https://github.com/user-attachments/assets/e69ab6d3-4d76-47a0-924b-644b255b0ad5 =500x)
+入力欄はデフォルトでいいです。Submitを押下しましょう。
+![](https://github.com/user-attachments/assets/ea485f6a-f5eb-48a1-bf81-dddb338c0ff5 =500x)
+提出までできました。
+
+### 結果を確認する。
+[submissions](https://www.kaggle.com/competitions/biohub-cell-tracking-during-development/submissions)にアクセスします。
+下図のVersion 7が成功した状態です。
+Version 6は失敗ですね。この時は提出ファイルのフォーマットが合ってなくてエラーになりました。修正してまたRun Allからやり直したら成功しました。
+![](https://github.com/user-attachments/assets/37283caa-fff3-4736-8e23-820903cb93ae =500x)
+これで、提出まで完了です。
+ここからスコアアップのサイクルが始まります。
+頑張ってください!!
 
 ### 最初の提出モデルを作る
 
