@@ -45,22 +45,9 @@ C:\user\xxx\.kaggle\kaggle.json
 4. Notebookの中身を下記に公開しています。Copy and Editから始めると簡単です。  
 https://www.kaggle.com/code/aaaa1597/biocell-track-by-hgs
 
-### データの概要と読み込み
-
-本コンペティションのデータは、OME-Zarrと呼ばれる、巨大な多次元バイナリデータを効率的に扱うためのフォーマットで提供されています。形状は基本的に(T,C,Z,Y,X)の5次元構造(T:時間, C:チャンネル, Z:深さ, Y:高さ, X:幅)となっています。
-
-```python
-import zarr
-import numpy as np
-
-# Zarrストアを開く
-store = zarr.open("path_to_data.zarr", mode='r')
-# 最高解像度の配列を取得
-arr = store['0']
-print(f"Data shape: {arr.shape}")
-```
 :::message alert
-上記コード実は、"import zarr"でエラーになります。kaggleには`zarr`がないらしいです。なので別途インストール作業が必要です。さらに提出時には、internet off って設定にする必要があって、Notebookに `!pip install zarr`ができません。
+"import zarr"でエラー!!
+kaggleには`zarr`がないので、別途インストールする必要があります。ですが提出時、internet off って設定にする必要があって、これが原因で、Notebookの方に `!pip install zarr`を記述することができません(提出時にエラーになるため)。
 
 そのあたりを↓にまとめました。
 [(Kaggle提出のための)Offline環境でプリインストールされていないライブラリをインストールする方法](https://zenn.dev/rg687076/articles/zenn_20260714_0630_kaggle-offline-install)
