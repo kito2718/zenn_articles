@@ -144,6 +144,6 @@ CSVファイルが生成されたら、そのNotebook(*.ipynb)をアップロー
 
 ### 初回コミットコード
 初回コミットコードは下記です。
-https://gist.github.com/kito2718/2bbb9dec9908464191eb008643fc33c8
+@[gist](https://gist.github.com/kito2718/2bbb9dec9908464191eb008643fc33c8)
 
 お役に立てれば。
