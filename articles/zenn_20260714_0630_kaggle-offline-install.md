@@ -40,7 +40,7 @@ flowchart TD
 pip download zarr -d ./zarr_wheels_fixed --only-binary=:all: --platform manylinux2014_x86_64 --python-version 3.12 --implementation cp
 ```
 
-これによって、指定したフォルダ内に `numcodecs` などの依存関係も含めた複数の `.whl` ファイルがダウンロードされます。
+これで、フォルダに `numcodecs` などの依存関係も含めた複数の `.whl` ファイルがダウンロードされます。
 ダウンロード完了後、以下のコマンドでフォルダを開いておきます。
 
 ```cmd
@@ -48,9 +48,12 @@ start zarr_wheels_fixed
 ```
 
 #### 2. Kaggleにデータセットとしてアップロードする
-1. Kaggleの「Datasets」ページから **「New Dataset」** をクリックします。
-2. タイトルを入力(例: `zarr-offline-whl`)します。
-3. 先ほど開いたエクスプローラーから、ダウンロードしたファイルをすべてドラッグ&ドロップし、アップロードします。
+1. Kaggleの[「Datasets」ページ](https://www.kaggle.com/datasets)から **「New Dataset」** をクリック。
+   ![](https://github.com/user-attachments/assets/e302b744-5f70-409f-8250-306bb080d90f =400x)
+2. ダウンロードしたファイルをすべてドラッグ&ドロップし、アップロードします。
+![](https://github.com/user-attachments/assets/b30853fd-d3d3-4d7f-aa69-9644e68142da =400x)
+3. タイトルを入力(例: `zarr-offline-whl`)、Visibilityも設定(Private|Publicお好きな方を)。
+![](https://github.com/user-attachments/assets/89111401-4b2f-449b-9bce-4f9d69a52104 =400x)
 4. アップロード完了後、**「Create」** を押してデータセットを作成します。
 
 #### 3. ノートブックにマウントしてオフラインインストールを実行する
