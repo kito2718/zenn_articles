@@ -8,7 +8,7 @@ series: "Biohub細胞トラッキング挑戦記"
 tags: ["kaggle", "pip", "offline-install", "zarr"]
 ---
 
-[![アイキャッチ画像](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_20260714_0630_BitCellTracking_eyecatch.png =500x)](https://www.kaggle.com/competitions/biohub-cell-tracking-during-development)
+[![アイキャッチ画像](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_20260714_0630_kaggle-offline-install_search.png =500x)](https://www.kaggle.com/competitions/biohub-cell-tracking-during-development)
 *Biohub - Cell Tracking During Development*
 
 ## Abstruct
