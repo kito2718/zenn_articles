@@ -56,16 +56,15 @@ start zarr_wheels_fixed
 ![](https://github.com/user-attachments/assets/89111401-4b2f-449b-9bce-4f9d69a52104 =400x)
 4. アップロード完了後、**「Create」** を押してデータセットを作成します。
 
-#### 3. ノートブックにマウントしてオフラインインストールを実行する
+#### 3. Notebookにinstallしてオフラインインストールを実行する
 1. 本番用のノートブックの右側パネルで、**「Internet off」** に設定します。
-2. **「+ Add Input」** をクリックし、作成したデータセットをノートブックに追加します。
+![](https://github.com/user-attachments/assets/0d68da4b-fa66-44ba-822c-da3ac366694f)
 
+3. **「+ Add Input」** をクリックし、作成したデータセットをノートブックに追加します。
 以下の画像のように、ご自身のWorkから検索して追加します。
-
 ![Kaggle Dataset Search Filter](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_20260714_0630_kaggle-offline-install_search.png)
 
 3. ノートブックの一番最初のセルで、以下のコマンドを実行します。
-
 ```python
 !pip install --no-index --find-links=/kaggle/input/datasets/aaaa1597/zarr-offline-installation-wheels/zarr_wheels_fixed zarr
 ```
