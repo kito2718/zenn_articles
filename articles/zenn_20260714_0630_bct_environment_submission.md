@@ -1,5 +1,5 @@
 ---
-title: "18-①Kaggle実践3 Biohub細胞トラッキング：環境構築からベースライン初回提出までの完全ガイド"
+title: "18-①Kaggle実践3 Biohub細胞トラッキング：環境構築から初回提出までの手順"
 emoji: "🔬"
 type: "tech"
 topics: ["kaggle", "python", "bioinformatics", "celltracking"]
