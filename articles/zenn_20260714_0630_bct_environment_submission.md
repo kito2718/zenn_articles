@@ -7,6 +7,8 @@ published: true
 series: "Biohub細胞トラッキング挑戦記"
 tags: ["kaggle", "python", "bioinformatics", "cell-tracking"]
 ---
+[18-①Kaggle実践3 Biohub細胞トラッキング：環境構築から初回提出までの手順](この記事)
+**18-②Kaggle実践3 Biohub細胞トラッキング：初回提出コードを解説してみた**(https://zenn.dev/rg687076/articles/zenn_20260717_1930_bct_code_explanation)
 
 [![アイキャッチ画像](https://github.com/kito2718/zenn_articles/raw/main/articles/images/zenn_20260714_0630_bitcelltracking_eyecatch_.png =500x)](https://www.kaggle.com/competitions/biohub-cell-tracking-during-development)
 *Biohub - Cell Tracking During Development*
