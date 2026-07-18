@@ -15,7 +15,7 @@ tags: ["kaggle", "python", "bioinformatics", "cell-tracking"]
 *Biohub - Cell Tracking During Development*
 
 ## Abstruct
-- この[記事](https://zenn.dev/rg687076/articles/zenn_20260714_0630_bct_environment_submission)で扱った、初回提出コードの解説
+- [前回記事](https://zenn.dev/rg687076/articles/zenn_20260714_0630_bct_environment_submission)で初回提出したコードの解説
 
 ## 概要
 提出するだけでもムズくって、ひぃひぃ泣いてた。そのコード解説を載せてみた。
